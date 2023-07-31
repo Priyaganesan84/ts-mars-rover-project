@@ -1,1 +1,0 @@
-# ts-mars-rover-project
