@@ -22,8 +22,6 @@ npm install
 To run the unit tests for the Mars Rover simulation, you can use the following command:
 npm test
 
-shell
-Copy code
 
 ## Project Structure
 The project has the following structure:
@@ -36,3 +34,9 @@ ts-mars-rover-project/
 ├── package.json
 ├── package-lock.json
 └── README.md
+
+- The `src/` directory contains the TypeScript implementation of the Mars Rover simulation in the `marsRover.ts` file.
+
+- The `tests/` directory contains the test suite for the Mars Rover simulation in the `marsRover.test.ts` file.
+
+
