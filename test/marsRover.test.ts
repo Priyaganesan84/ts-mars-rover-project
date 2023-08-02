@@ -1,4 +1,4 @@
-import { moveRovers, Position, RoverData } from './marsRover';
+import { moveRovers, Position, RoverData } from '../src/marsRover';
 
 describe('Mars Rover', () => {
   it('should return the correct final positions for the given test case', () => {

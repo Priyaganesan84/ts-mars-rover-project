@@ -1,4 +1,4 @@
-import { moveRovers, Position, RoverData } from './marsRover';
+import { moveRovers, Position, RoverData } from '../src/marsRover';
 
 describe('Mars Rover', () => {
     it('should return the correct final positions for the given test case 1', () => {
@@ -39,7 +39,8 @@ describe('Mars Rover', () => {
     });
   
     it('should handle a rover with invalid instructions', () => {
-      // Test Case 3: A rover with invalid instructions should be skipped, and its initial position should be returned.
+      // Test Case 3: A rover with invalid instructions should be skipped, 
+      //and its initial position should be returned.
       const plateauSize: Position = { x: 8, y: 8, orientation: 'N' };
       const rover1: RoverData = {
         position: { x: 2, y: 3, orientation: 'S' },
