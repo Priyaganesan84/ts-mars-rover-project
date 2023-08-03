@@ -2,12 +2,12 @@
 export interface Position {
   x: number;  // x co-ordinate
   y: number;  // y co - ordinate
-  orientation: 'N' | 'E' | 'S' | 'W';  //// Orientation: North, East, South, or West
 }
 
-// Definition of the RoverData interface 
+// Definition of the RoverData interface
 export interface RoverData {
   position: Position;   // Initial position of the rover
+  orientation: 'N' | 'E' | 'S' | 'W';  // Orientation: North, East, South, or West
   instructions: string; // Instructions to guide the rover's movement
 }
 
@@ -21,21 +21,18 @@ export function moveRovers(plateauSize: Position, roversData: RoverData[]): stri
   const { x: maxX, y: maxY } = plateauSize;
 
   // Function to move a single rover based on its instructions and return its final position
-  function moveRover(position: Position, instructions: string): Position {
-    let { x, y, orientation } = position;
+  function moveRover(position: Position, orientation: 'N' | 'E' | 'S' | 'W', instructions: string): Position {
+    let { x, y } = position;
     const directions: Array<'N' | 'E' | 'S' | 'W'> = ['N', 'E', 'S', 'W'];
 
-    //Function to turn rover to left (change orientation)
     function turnLeft(): void {
       orientation = directions[(directions.indexOf(orientation) - 1 + 4) % 4];
     }
-     
-    //Function to turn rover to right (change orientation)
+
     function turnRight(): void {
       orientation = directions[(directions.indexOf(orientation) + 1) % 4];
     }
-   
-    // Function to move the rover forward based on its current orientation
+
     function moveForward(): void {
       switch (orientation) {
         case 'N':
@@ -51,12 +48,11 @@ export function moveRovers(plateauSize: Position, roversData: RoverData[]): stri
           x = Math.max(x - 1, 0); // Constrain the movement within the left boundary (x=0)
           break;
       }
-        // Additional step to ensure the rover doesn't go beyond the lower-left boundary
-        x = Math.max(x, 0);
-        y = Math.max(y, 0);
+      // Additional step to ensure the rover doesn't go beyond the lower-left boundary
+      x = Math.max(x, 0);
+      y = Math.max(y, 0);
     }
 
-     // Iterate through the instructions for the current rover
     for (const instruction of instructions) {
       if (!isValidInstruction(instruction)) {
         // Invalid instruction found, skip this rover's instructions
@@ -75,14 +71,14 @@ export function moveRovers(plateauSize: Position, roversData: RoverData[]): stri
           break;
       }
     }
-  // Return the final position of the rover after executing the instructions
-    return { x, y, orientation };
+
+    return { x, y };
   }
 
- // Map through each rover's data and calculate their final positions
-  return roversData.map(({ position, instructions }) => {
-    const finalPosition = moveRover(position, instructions);
-  // Return the final position in the required format (x y orientation)
-    return `${finalPosition.x} ${finalPosition.y} ${finalPosition.orientation}`;
+  return roversData.map(({ position, orientation, instructions }) => {
+    const finalPosition = moveRover(position, orientation, instructions);
+    return `${finalPosition.x} ${finalPosition.y} ${orientation}`;
   });
 }
+
+
